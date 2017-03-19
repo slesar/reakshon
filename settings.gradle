@@ -1,0 +1,4 @@
+include ':app'
+include ':reakshon-annotations'
+include ':reakshon-plugin'
+include ':reakshon-runtime'
