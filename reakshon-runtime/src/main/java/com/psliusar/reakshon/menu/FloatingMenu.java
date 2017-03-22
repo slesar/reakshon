@@ -3,8 +3,8 @@ package com.psliusar.reakshon.menu;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.graphics.drawable.VectorDrawableCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +21,7 @@ public class FloatingMenu extends FrameLayout {
         final LayoutParams lp = new LayoutParams(size, size);
         lp.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
         menu.setLayoutParams(lp);
-
-        final VectorDrawableCompat icon = VectorDrawableCompat.create(activity.getResources(), R.drawable.reakshon_magic_menu_button, null);
-        menu.setBackgroundDrawable(icon);
-
+        menu.setBackgroundResource(R.drawable.reakshon_magic_menu_button);
         menu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,7 +30,12 @@ public class FloatingMenu extends FrameLayout {
             }
         });
 
-        ((ViewGroup) activity.findViewById(android.R.id.content)).addView(menu);
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                ((ViewGroup) activity.findViewById(android.R.id.content)).addView(menu);
+            }
+        });
     }
 
     public FloatingMenu(Context context) {

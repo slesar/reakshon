@@ -93,7 +93,9 @@ public abstract class Thing<T> {
             @Override
             public boolean test(ReakshonEvent event) throws Exception {
                 final String method = event.getMethodName();
-                return objectClass.isAssignableFrom(event.getType())
+                final Object object = event.getObject();
+                final Class<?> type = object == null ? event.getType() : object.getClass();
+                return objectClass.isAssignableFrom(type)
                         && (methodName == null && "".equals(method) || method.equals(methodName));
             }
         };
